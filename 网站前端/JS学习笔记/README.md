@@ -1722,13 +1722,15 @@
 ## 性能原理
 
 ### JS的预编译
+>参考[JavaScript - 预编译](http://www.jianshu.com/p/a91cddc5c705)。
+
 1. JS是一门脚本语言，不经过~~编译~~而直接运行，但运行前先进行预编译。
 2. JS的预编译是以代码块`<script></script>`为范围，即每遇到一个代码块都会进行：**预编译 -> 执行**。
 3. 预编译：在内存中开辟一块空间，用来存放**变量**和**函数**。
 
-    为使用`var`声明的变量、使用`function`声明的函数在内存中开辟一块空间，用来存放使用两者声明（不会赋值，所有变量的值都是`undefined`、函数内容会被预编译）；
+    为使用`var`声明的变量、使用`function`声明的函数在内存中开辟一块空间，用来存放两者声明（不会赋值，所有变量的值都是`undefined`、函数内容会被预编译）；
 
-    >`const/let`不允许同名声明为变量和函数。
+    >`const/let`不允许同名声明。
 
     - 在预编译时，`function`的优先级比`var`高：
 
@@ -1741,21 +1743,27 @@
         >// 预编译阶段a1/b2为函数，运行时a1/b2赋值后成为变量
         >var a1 = 1;
         >function a1() {}
-        >console.log(a1);    //1
+        >console.log(a1);       // 1
         >
         >function b2() {}
         >var b2 = 1;
-        >console.log(b2);    //1
+        >console.log(b2);       // 1
         >
         >
         >// 预编译阶段c3/d4为函数，运行时没有赋值
         >var c3;
         >function c3() {}
-        >console.log(c3);    //function c3
+        >console.log(c3);       // function c3
         >
         >function d4() {}
         >var d4;
-        >console.log(d4);    //function d4
+        >console.log(d4);       // function d4
+        >
+        >
+        >// 预编译阶段e5为变量（undefined），运行时被赋值给匿名函数
+        >console.log(e5);       // undefined
+        >var e5 = function () {};
+        >console.log(e5);       // function 匿名
         >```
 4. 变量赋值是在JS执行阶段（运行时）进行的。
 
