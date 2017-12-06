@@ -1740,30 +1740,34 @@
         >e.g.
         >
         >```javascript
-        >// 预编译阶段a1/b2为函数，运行时a1/b2赋值后成为变量
+        >// 预编译阶段a1/b2为函数，运行时a1/b2赋值成为变量
+        >console.log(a1);        // function a1
         >var a1 = 1;
         >function a1() {}
-        >console.log(a1);       // 1
+        >console.log(a1);        // 1
         >
+        >console.log(b2);        // function b2
         >function b2() {}
         >var b2 = 1;
-        >console.log(b2);       // 1
+        >console.log(b2);        // 1
         >
         >
         >// 预编译阶段c3/d4为函数，运行时没有赋值
+        >console.log(c3);        // function c3
         >var c3;
         >function c3() {}
-        >console.log(c3);       // function c3
+        >console.log(c3);        // function c3
         >
+        >console.log(d4);        // function d4
         >function d4() {}
         >var d4;
-        >console.log(d4);       // function d4
+        >console.log(d4);        // function d4
         >
         >
-        >// 预编译阶段e5为变量（undefined），运行时被赋值给匿名函数
-        >console.log(e5);       // undefined
+        >// 预编译阶段e5为变量，运行时被赋值给匿名函数
+        >console.log(e5);        // undefined
         >var e5 = function () {};
-        >console.log(e5);       // function 匿名
+        >console.log(e5);        // function 匿名
         >```
 4. 变量赋值是在JS执行阶段（运行时）进行的。
 
